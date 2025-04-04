@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+        <h2>Expense Tracker</h2>
+     
+
+        <input type="text" id="desc" placeholder="Enter description">
+        <input type="number" id="amount" placeholder="Enter amount">
+
+        <div style="display: flex; justify-content: space-between;">
+            <button class="income" onclick="addTransaction('income')">Add Income</button>
+            <button class="expense" onclick="addTransaction('expense')">Add Expense</button>
+        </div>
+
+        <ul id="transaction-list"></ul>
+        <h3>Balance: ₹<span id="balance">0</span></h3>
+    </div>
+    <script src="script.js" ></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
