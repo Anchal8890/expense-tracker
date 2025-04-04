@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Tracker</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            background: linear-gradient(160deg, #2b49dc, #ccc);;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+        h2 {
+            margin-bottom: 10px;
+            color: white;
+        }
+        h3 {
+            margin: 15px 0;
+            color: #0d0c70;
+            font-weight: 500;
+            font-size: x-large;
+            text-align: end;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 15px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+        button {
+            width: 48%;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin: 10px 1%;
+            font-size: 15px;
+            font-weight: bold;
+            transition: background 0.3s ease;
+        }
+        .income {
+            background: linear-gradient(to right, rgb(96 236 20), rgb(26 123 10));
+            color: white;
+        }
+        .income:hover {
+            background: linear-gradient(to right, #3b8218, #7bcf44);
+        }
+        .expense {
+            background: linear-gradient(to right, #e53935, #e35d5b);
+            color: white;
+        }
+        .expense:hover {
+            background: linear-gradient(to right, #c62828, #d84341);
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+            margin-top: 20px;
+        }
+        li {
+            padding: 12px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 15px;
+            font-weight: 500;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Expense Tracker</h2>
+     
+
+        <input type="text" id="desc" placeholder="Enter description">
+        <input type="number" id="amount" placeholder="Enter amount">
+
+        <div style="display: flex; justify-content: space-between;">
+            <button class="income" onclick="addTransaction('income')">Add Income</button>
+            <button class="expense" onclick="addTransaction('expense')">Add Expense</button>
+        </div>
+
+        <ul id="transaction-list"></ul>
+        <h3>Balance: ₹<span id="balance">0</span></h3>
+    </div>
+
+    <script>
+        let balance = 0;
+        const transactions = [];
+
+        function addTransaction(type) {
+            const descInput = document.getElementById('desc');
+            const amountInput = document.getElementById('amount');
+            const desc = descInput.value.trim();
+            const amount = parseFloat(amountInput.value);
+
+            if (!desc || isNaN(amount) || amount <= 0) return;
+
+            transactions.push({ desc, amount, type });
+            if (type === 'income') balance += amount;
+            else balance -= amount;
+
+            descInput.value = '';
+            amountInput.value = '';
+
+            updateUI();
+        }
+
+        function updateUI() {
+            document.getElementById('balance').textContent = balance.toFixed(2);
+            const list = document.getElementById('transaction-list');
+            list.innerHTML = '';
+
+            transactions.forEach(t => {
+                const li = document.createElement('li');
+                li.style.background = t.type === 'income' ? 'linear-gradient(to right, #76b852, #8DC26F)' : 'linear-gradient(to right, #e52d27, #b31217)';
+                li.innerHTML = `${t.desc} <span>₹${t.amount}</span>`;
+                list.appendChild(li);
+            });
+        }
+    </script>
+</body>
+</html>
