@@ -80,3 +80,18 @@ li {
     font-weight: 500;
     color: #fff;
 }
+.delete-btn {
+    cursor: pointer;
+    margin-left: 10px;
+    display: none;
+  }
+  
+  li:hover .delete-btn {
+    display: inline; /* Desktop hover */
+  }
+  
+  /* Mobile toggle handled by JS by toggling .show class */
+  .show {
+    display: inline !important;
+  }
+  
